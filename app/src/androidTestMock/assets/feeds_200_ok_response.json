@@ -1,0 +1,20 @@
+{
+  title: "About Canada",
+  rows: [
+    {
+      title: "Lion Air victims' ",
+      description: "Lion Air victims' belongings confirm their fate",
+      imageHref: "http://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/American_Beaver.jpg/220px-American_Beaver.jpg"
+    },
+    {
+      title: "Flag",
+      description: "US using Saudi weakness to push for end to Yemen War",
+      imageHref: "http://images.findicons.com/files/icons/662/world_flag/128/flag_of_canada.png"
+    },
+    {
+      title: "Trump says up to 15,000 troops could go to the border",
+      description: "It is a well known fact that polar bears are the main mode of transportation in Canada. They consume far less gas and have the added benefit of being difficult to steal.",
+      imageHref: "http://1.bp.blogspot.com/_VZVOmYVm68Q/SMkzZzkGXKI/AAAAAAAAADQ/U89miaCkcyo/s400/the_golden_compass_still.jpg"
+    }
+  ]
+}

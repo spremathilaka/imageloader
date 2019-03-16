@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AndroidPracticalAssignmentApp</string>
+
+    <string name="no_data_available">No feed available</string>
+    <string name="feed_title">feed title</string>
+    <string name="feed_list">Feed List</string>
+    <string name="feed_description">Feed Description</string>
+    <string name="feed_image">feed image</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="error_loading_data">Error occurred while loading feed data</string>
+</resources>

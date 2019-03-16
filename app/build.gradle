@@ -1,0 +1,175 @@
+apply plugin: 'com.android.application'
+
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.samithprem.apa"
+        minSdkVersion 24
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+
+    buildTypes {
+
+        debug {
+            minifyEnabled false
+            useProguard false
+        }
+
+        release {
+            minifyEnabled true
+            useProguard true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+        }
+    }
+    flavorDimensions "default"
+
+
+    productFlavors {
+        mock {
+            dimension "default"
+            applicationIdSuffix = ".mock"
+        }
+        prod {
+            dimension "default"
+        }
+    }
+
+    // Remove mockRelease as it's not needed.
+    android.variantFilter { variant ->
+        if (variant.buildType.name == 'release'
+                && variant.getFlavors().get(0).name == 'mock') {
+            variant.setIgnore(true)
+        }
+    }
+
+    // Always show the result of every unit test, even if it passes.
+    testOptions.unitTests.all {
+        testLogging {
+            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    testOptions {
+        execution 'ANDROID_TEST_ORCHESTRATOR'
+    }
+
+
+}
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.android.support:appcompat-v7:$android_support_version"
+
+    // Support Design
+    implementation "com.android.support:design:$android_support_version"
+
+    //Card View
+    implementation "com.android.support:cardview-v7:$android_support_version"
+
+    // RecyclerView
+    implementation "com.android.support:recyclerview-v7:$android_support_version"
+
+    // Constraint Layout
+    implementation "com.android.support.constraint:constraint-layout:$constraint_layout_version"
+
+    // LiveData & ViewModel
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+
+    // optional - ReactiveStreams support for LiveData
+    implementation "android.arch.lifecycle:reactivestreams:$lifecycle_version"
+
+    // Room
+
+    //implementation "android.arch.persistence.room:runtime:$room_version"
+
+    //annotationProcessor "android.arch.persistence.room:compiler:$room_version"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    // GSON
+    implementation "com.google.code.gson:gson:$gson_version"
+    implementation "com.squareup.picasso:picasso:$picasso_version"
+    implementation "com.jakewharton.picasso:picasso2-okhttp3-downloader:$picasso_downloader_version"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_versoin"
+    implementation "com.squareup.okhttp3:logging-interceptor:${okhttp_versoin}"
+
+    // DAGGER 2
+    implementation "com.google.dagger:dagger-android:$dagger2_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger2_version"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$dagger2_version"
+    annotationProcessor "com.google.dagger:dagger-compiler:$dagger2_version"
+
+    //Rx
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+
+    implementation "org.apache.commons:commons-lang3:$commons_lang3_version"
+
+    testImplementation "junit:junit:$junit_version"
+    //testImplementation "org.mockito:mockito-all:$mockito_version"
+    testImplementation "org.mockito:mockito-core:$mockito_version"
+    testImplementation "org.hamcrest:hamcrest-all:$hamcrest_version"
+
+    testImplementation "android.arch.core:core-testing:$lifecycle_version"
+
+
+    testImplementation "org.powermock:powermock-api-mockito2:$powermock_version"
+    testImplementation "org.powermock:powermock-module-junit4-rule-agent:$powermock_version"
+    testImplementation "org.powermock:powermock-module-junit4-rule:$powermock_version"
+    testImplementation "org.powermock:powermock-module-junit4:$powermock_version"
+
+    testImplementation "org.powermock:powermock-core:$powermock_version"
+    testImplementation "org.powermock:powermock-module-junit4:$powermock_version"
+    testImplementation "org.powermock:powermock-api-mockito:$powermock_version"
+
+
+    //UI TEST
+    androidTestImplementation "junit:junit:$junit_version"
+    androidTestImplementation "com.squareup.okhttp3:mockwebserver:$mockwebserver_version"
+
+    androidTestImplementation ("com.android.support.test:runner:$test_runner_version"){
+        exclude module: 'support-annotations'
+    }
+    androidTestImplementation ("com.android.support.test:rules:$test_rules_version"){
+        exclude module: 'support-annotations'
+    }
+    // Espresso UI Testing
+    androidTestImplementation ("com.android.support.test.espresso:espresso-core:$espressoVersion"){
+        exclude module: 'support-annotations'
+    }
+    androidTestImplementation ("com.android.support.test.espresso:espresso-contrib:$espressoVersion"){
+        exclude module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude module: 'recyclerview-v7'
+    }
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:$espressoVersion"
+    androidTestImplementation "com.android.support.test.espresso.idling:idling-concurrent:$espressoVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-idling-resource:$espressoVersion"
+
+    // Resolve conflicts between main and test APK:
+    androidTestImplementation "com.android.support:support-annotations:$android_support_version"
+    androidTestImplementation "com.android.support:support-v4:$android_support_version"
+    androidTestImplementation "com.android.support:recyclerview-v7:$android_support_version"
+    androidTestImplementation "com.android.support:appcompat-v7:$android_support_version"
+    androidTestImplementation "com.android.support:design:$android_support_version"
+    androidTestUtil "com.android.support.test:orchestrator:$orchestrator_version"
+
+}

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="feed"
+            type="com.samithprem.apa.data.source.remote.api.model.Feed" />
+
+        <variable
+            name="callback"
+            type="com.samithprem.apa.ui.feed.list.ListItemClickCallback" />
+
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/item_horizontal_margin"
+        android:layout_marginEnd="@dimen/item_horizontal_margin"
+        android:onClick="@{() ->  callback.onClick(feed)}"
+        android:orientation="horizontal"
+        app:cardUseCompatPadding="true">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/feed_title"
+                style="@android:style/TextAppearance.Material.Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="@string/feed_title"
+                android:text="@{feed.title}"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.029"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="he purpose of this exercise is to assess candidate developer’s Android technical proficiency, coding knowledge and
+style. The exercise involves build a" />
+
+            <TextView
+                android:id="@+id/feed_description"
+                style="@android:style/TextAppearance.Material.SearchResult.Subtitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:contentDescription="@string/feed_description"
+                android:text="@{feed.description}"
+                android:textAlignment="viewStart"
+                android:visibility="@{TextUtils.isEmpty(feed.description) ? View.GONE : View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/barrier4"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/feed_title"
+                app:layout_constraintVertical_bias="0.0"
+                tools:text="he purpose of this exercise is to ass candidate developer’s Android technical proficiency, coding knowledge and
+style. The exercise involves build a" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="@dimen/feed_image_width"
+                android:layout_height="@dimen/feed_image_height"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:contentDescription="@string/feed_image"
+                app:imageUrl="@{feed.imageHref}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/barrier4"
+                app:layout_constraintTop_toTopOf="@+id/feed_description"
+                app:layout_constraintVertical_bias="0.0"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.75414366"
+                tools:src="@drawable/ic_launcher_background" />
+
+            <android.support.constraint.Barrier
+                android:id="@+id/barrier4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierAllowsGoneWidgets="true"
+                app:barrierDirection="left"
+                app:constraint_referenced_ids="imageView"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                tools:layout_editor_absoluteX="338dp" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</layout>
